@@ -43,17 +43,40 @@ class DemoStates extends React.Component {
       </th>
     ));
 
-    const habitList = habits.map((item) => (
+    const rows = habits.map((habit) => {
+      const checkboxCells = dates.map((date) => {
+        const key = habit.key + "-" + date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear() 
+        return (
+          <td> 
+            <input 
+              type="checkbox" 
+              checked={!!checked[key]} 
+              onChange={() => dispatch(toggleCheck(key))} 
+              />
+          </td>
+        ) 
+      })
+      return (
         <tr>
           <td>
-          <label
-            key={item.key}
-            styleName={"checkbox-label"}
-            onChange={() => dispatch(toggleCheck(item.key))}
-            >
-            <span> {item.label} </span>
-            <input type="checkbox" checked={!!checked[item.key]} onChange={() => null} />
-          </label>
+            <label styleName={"checkbox-label"} >
+              <span> {habit.label} </span>
+            </label>
+          </td>
+          {checkboxCells}
+        </tr>
+        )
+    })
+ 
+    const habitNames = habits.map((item) => (
+        <tr>
+          <td>
+            <label
+              key={item.key}
+              styleName={"checkbox-label"}
+              onChange={() => dispatch(toggleCheck(item.key))} >
+              <span> {item.label} </span>
+            </label>
           </td>
         </tr>
     ))
@@ -69,7 +92,7 @@ class DemoStates extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {habitList} 
+            {rows} 
           </tbody>
         </table>   
       </div>

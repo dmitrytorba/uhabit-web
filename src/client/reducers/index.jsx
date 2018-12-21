@@ -24,13 +24,13 @@ const name = (store, action) => {
 
 const create = (store, action) => {
   if (action.type === "CREATE") {
-    debugger
     const name = action.value.get('name')
     return {
       habits: [
         ...store.habits,
         {
-          name: name
+          label: name,
+          key: name
         }
       ]
     }

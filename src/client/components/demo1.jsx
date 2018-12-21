@@ -20,6 +20,7 @@ class Demo1 extends Component {
       event.preventDefault();
       const formData = new FormData(event.target);
       this.props.dispatch(createHabit(formData));
+      this.props.history.push('/')
   }
 
   render() {

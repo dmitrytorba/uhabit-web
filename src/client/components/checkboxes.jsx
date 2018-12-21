@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { toggleCheck, incNumber, decNumber } from "../actions";
+import { toggleCheck } from "../actions";
 import "../styles/custom.css";
 
-class DemoStates extends React.Component {
+class Checkboxes extends React.Component {
   render() {
     const { checked, habits, dispatch } = this.props;
 
@@ -80,7 +80,7 @@ class DemoStates extends React.Component {
   }
 }
 
-DemoStates.propTypes = {
+Checkboxes.propTypes = {
   checked: PropTypes.bool,
   dispatch: PropTypes.func.isRequired
 };
@@ -95,4 +95,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   dispatch => ({ dispatch })
-)(DemoStates);
+)(Checkboxes);

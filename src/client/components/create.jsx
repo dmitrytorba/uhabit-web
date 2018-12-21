@@ -5,13 +5,9 @@ import { inputName, createHabit } from "../actions";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 import demoStyle from "../styles/demo1.css"; // eslint-disable-line no-unused-vars
 
-class Demo1 extends Component {
+class Create extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      name: { value: "" },
-    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -39,9 +35,6 @@ class Demo1 extends Component {
                 id="nameField"
                 name="name"
                 value={this.props.name}
-                onChange={event => {
-                  dispatch(inputName(event.target.value));
-                }}
               />
               <input type="submit" value="Save" />
             </fieldset>
@@ -52,18 +45,16 @@ class Demo1 extends Component {
   }
 }
 
-Demo1.propTypes = {
-  name: PropTypes.string,
+Create.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    name: state.name.value,
   };
 };
 
 export default connect(
   mapStateToProps,
   dispatch => ({ dispatch })
-)(Demo1);
+)(Create);

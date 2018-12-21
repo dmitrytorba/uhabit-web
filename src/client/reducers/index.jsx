@@ -12,16 +12,6 @@ const checkBox = (store, action) => {
   return store || { checked: {}};
 };
 
-const name = (store, action) => {
-  if (action.type === "INPUT_NAME") {
-    return {
-      value: action.value
-    };
-  }
-
-  return store || { value: "" };
-};
-
 const create = (store, action) => {
   if (action.type === "CREATE") {
     const name = action.value.get('name')
@@ -40,6 +30,5 @@ const create = (store, action) => {
 
 export default combineReducers({
   checkBox,
-  name,
   create
 });

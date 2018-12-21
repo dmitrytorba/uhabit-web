@@ -12,21 +12,7 @@ const checkBox = (store, action) => {
   return store || { checked: {}};
 };
 
-const number = (store, action) => {
-  if (action.type === "INC_NUMBER") {
-    return {
-      value: store.value + 1
-    };
-  } else if (action.type === "DEC_NUMBER") {
-    return {
-      value: store.value - 1
-    };
-  }
-
-  return store || { value: 0 };
-};
-
-const username = (store, action) => {
+const name = (store, action) => {
   if (action.type === "INPUT_NAME") {
     return {
       value: action.value
@@ -36,29 +22,24 @@ const username = (store, action) => {
   return store || { value: "" };
 };
 
-const textarea = (store, action) => {
-  if (action.type === "INPUT_TEXT_AREA") {
+const create = (store, action) => {
+  if (action.type === "CREATE") {
+    debugger
+    const name = action.value.get('name')
     return {
-      value: action.value
-    };
+      habits: [
+        ...store.habits,
+        {
+          name: name
+        }
+      ]
+    }
   }
-
-  return store || { value: "" };
-};
-
-const selectedOption = (store, action) => {
-  if (action.type === "SELECT_OPTION") {
-    return {
-      value: action.value
-    };
-  }
-  return store || { value: "0-13" };
+  return store || { habits: [] }
 };
 
 export default combineReducers({
   checkBox,
-  number,
-  username,
-  textarea,
-  selectedOption
+  name,
+  create
 });

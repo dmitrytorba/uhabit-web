@@ -102,14 +102,12 @@ class DemoStates extends React.Component {
 
 DemoStates.propTypes = {
   checked: PropTypes.bool,
-  value: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
     checked: state.checkBox.checked,
-    value: state.number.value
   };
 };
 

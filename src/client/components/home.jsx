@@ -20,15 +20,9 @@ import "../styles/raleway.css";
 import custom from "../styles/custom.css"; // eslint-disable-line no-unused-vars
 import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
-import DemoPureStates from "./demo-pure-states";
 import { DemoButtons } from "./demo-buttons";
 import { Nav } from "./nav";
 
-//
-import DemoCookies from "./demo-cookies";
-//
-
-//
 
 class Home extends React.Component {
   constructor(props) {
@@ -44,15 +38,6 @@ class Home extends React.Component {
 
         <div styleName={"custom.docs-section"}>
           <DemoStates />
-        </div>
-
-        {/* */}
-        <div styleName={"custom.docs-section"}>
-          <DemoCookies />
-        </div>
-        {/**/}
-
-        <div styleName={"custom.docs-section"}>
           <DemoButtons />
         </div>
       </div>

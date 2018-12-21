@@ -5,18 +5,6 @@ export const toggleCheck = key => {
   };
 };
 
-export const incNumber = () => {
-  return {
-    type: "INC_NUMBER"
-  };
-};
-
-export const decNumber = () => {
-  return {
-    type: "DEC_NUMBER"
-  };
-};
-
 export const inputName = value => {
   return {
     type: "INPUT_NAME",
@@ -24,16 +12,10 @@ export const inputName = value => {
   };
 };
 
-export const inputTextarea = value => {
+export const createHabit = value => {
   return {
-    type: "INPUT_TEXT_AREA",
+    type: "CREATE",
     value
   };
 };
 
-export const selectOption = value => {
-  return {
-    type: "SELECT_OPTION",
-    value
-  };
-};

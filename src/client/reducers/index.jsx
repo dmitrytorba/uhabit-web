@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { firebaseReducer } from "react-redux-firebase"
 
 const checkBox = (store, action) => {
   if (action.type === "TOGGLE_CHECK") {
@@ -29,6 +30,7 @@ const create = (store, action) => {
 };
 
 export default combineReducers({
+  firebase: firebaseReducer,
   checkBox,
   create
 });

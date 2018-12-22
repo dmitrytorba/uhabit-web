@@ -34,7 +34,6 @@ class Create extends Component {
                 type="text"
                 id="nameField"
                 name="name"
-                value={this.props.name}
               />
               <input type="submit" value="Save" />
             </fieldset>

@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Home from "./components/home";
 import Create from "./components/create";
+import Login from "./components/login";
+import Signup from "./components/signup";
 import { withRouter } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 
@@ -34,6 +36,16 @@ const routes = [
         path: "/create",
         exact: true,
         component: Create 
+      },
+      {
+        path: "/login",
+        exact: true,
+        component: Login
+      },
+      {
+        path: "/signup",
+        exact: true,
+        component: Signup 
       }
     ]
   }

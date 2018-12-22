@@ -66,4 +66,4 @@ if (module.hot) {
 }
 
 
-firebase.push('test', {name: 'test'})
+//firebase.push('test', {name: 'test'})

@@ -65,5 +65,3 @@ if (module.hot) {
   });
 }
 
-
-//firebase.push('test', {name: 'test'})

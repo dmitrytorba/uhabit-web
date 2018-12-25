@@ -1,56 +1,31 @@
-import React, { Component } from "react";
-import firebaseui from "firebaseui"
-import firebase from "../firebase"
-import { connect } from "react-redux";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import GoogleButton from 'react-google-button' 
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
+export const Login = (props) => {
+  if (props.auth.isLoaded) {
+    props.history.push('/') 
   }
+  return (
+    <div>
+      <GoogleButton 
+        onClick={() => props.firebase.login({ provider: 'google', type: 'redirect' })}
+      />
+    </div>
+  )
+}
 
-  componentDidMount() {
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
+Login.propTypes = {
+  firebase: PropTypes.shape({
+    login: PropTypes.func.isRequired
+  }),
+  auth: PropTypes.object
+}
 
-    const uiConfig = {
-      callbacks: {
-        signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-          // User successfully signed in.
-          // Return type determines whether we continue the redirect automatically
-          // or whether we leave that to developer to handle.
-          return true;
-        },
-        uiShown: function() {
-          // The widget is rendered.
-        }
-      },
-      // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-      signInFlow: 'redirect',
-      signInSuccessUrl: '/',
-      signInOptions: [
-        // Leave the lines as is for the providers you want to offer your users.
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID
-      ],
-      // Terms of service url.
-      tosUrl: '<your-tos-url>',
-      // Privacy policy url.
-      privacyPolicyUrl: '<your-privacy-policy-url>'
-    };
-
-    // The start method will wait until the DOM is loaded.
-    ui.start('#firebaseui-auth-container', uiConfig);
-  }
-
-  render() {
-    return (
-      <div>
-        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
-        <div id="firebaseui-auth-container"></div>
-      </div>
-    )
-  }
-};
-
-export default connect(
-  state => ({}),
-  dispatch => ({ dispatch })
-)(Login);
+export default compose(
+  firebaseConnect(), // withFirebase can also be used
+  connect(({ firebase: { auth } }) => ({ auth }))
+)(Login)

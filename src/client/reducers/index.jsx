@@ -1,64 +1,67 @@
 import { combineReducers } from "redux";
 
-const checkBox = (store, action) => {
-  if (action.type === "TOGGLE_CHECK") {
-    const isChecked = !!store.checked[action.key]
-    const newMap = {...store.checked, [action.key]: !isChecked}
-    return {
-      checked: newMap
-    };
-  }
+const initialState = {
+  habits: [],
+  checks: {},
+  isFetching: false,
+  isSaved: true,
+  didInvalidate: false,
+  user: null
+}
 
-  return store || { checked: {}};
-};
-
-const create = (store, action) => {
-  if (action.type === "CREATE") {
-    const name = action.value.get('name')
-    return {
-      habits: [
-        ...store.habits,
-        {
-          label: name,
-          key: name
-        }
-      ]
-    }
-  }
-  return store || { habits: [] }
-};
-
-function data(
-  state = {
-    isFetching: false,
-    didInvalidate: false,
-    items: []
-  },
+const main = (
+  store = initialState,
   action
-) {
+) => {
   switch (action.type) {
+    case 'CREATE':
+      const name = action.value.get('name')
+      return Object.assign({}, store, {
+        habits: [
+          ...store.habits,
+          {
+            label: name,
+            key: name
+          }
+        ]
+      })
+    case 'TOGGLE_CHECK':
+      const isChecked = !!store.checks[action.key]
+      const newMap = {...store.checks, [action.key]: !isChecked}
+      return Object.assign({}, store, {
+        checks: newMap
+      })
+    case 'LOGIN_USER':
+      return Object.assign({}, store, {
+        user: action.user
+      })
     case 'INVALIDATE_DATA':
-      return Object.assign({}, state, {
+      return Object.assign({}, store, {
         didInvalidate: true
       })
     case 'REQUEST_DATA':
-      return Object.assign({}, state, {
+      return Object.assign({}, store, {
         isFetching: true,
         didInvalidate: false
       })
+    case 'REQUEST_SAVE':
+      return Object.assign({}, store, {
+        isSaved: false 
+      })
+    case 'SAVE_COMPLETE':
+      return Object.assign({}, store, {
+        isSaved: true 
+      })
     case 'RECEIVE_DATA':
-      return Object.assign({}, state, {
+      return Object.assign({}, store, {
         isFetching: false,
         didInvalidate: false,
-        items: action.data
+        checks: action.data.checks || {},
+        habits: action.data.habits || []
       })
     default:
-      return state
+      return store 
   }
 }
 
-export default combineReducers({
-  data,
-  checkBox,
-  create
-});
+export default main

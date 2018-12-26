@@ -6,7 +6,7 @@ import "../styles/custom.css";
 
 class Checkboxes extends React.Component {
   render() {
-    const { checked, habits, dispatch } = this.props;
+    const { checks, habits, dispatch } = this.props;
 
     const today = Date.now()
     const dates = [...Array(10).keys()].map(days => {
@@ -30,7 +30,7 @@ class Checkboxes extends React.Component {
           <td> 
             <input 
               type="checkbox" 
-              checked={!!checked[key]} 
+              checked={!!checks[key]} 
               onChange={() => dispatch(toggleCheck(key))} 
               />
           </td>
@@ -87,8 +87,8 @@ Checkboxes.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    checked: state.checkBox.checked,
-    habits: state.create.habits
+    checks: state.checks,
+    habits: state.habits
   };
 };
 

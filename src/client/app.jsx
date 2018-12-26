@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers";
-import { fetchData } from "./actions";
+import { fetchData, loginUser } from "./actions";
 import { renderRoutes } from "react-router-config";
 import firebase from "./firebase"
 
@@ -41,8 +41,8 @@ const start = App => {
   const reactStart = window.__PRELOADED_STATE__ && jsContent.innerHTML ? hydrate : render;
   firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        const ref = firebase.database().ref('users/' + user.uid)
-        store.dispatch(fetchData(ref)).then(() => console.log(store.getState()))
+        store.dispatch(loginUser(user))
+        store.dispatch(fetchData())
       } 
     });
 
@@ -68,5 +68,3 @@ if (module.hot) {
   });
 }
 
-
-//firebase.push('test', {name: 'test'})

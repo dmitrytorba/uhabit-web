@@ -10,10 +10,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in.
-        firebase.push('users/' + user.uid + '/test', {name: 'test'})
-      } else {
+      if (!user) {
         this.props.history.push('/login')
       }
     });
